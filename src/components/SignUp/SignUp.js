@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const SignUp = () => {
@@ -10,7 +11,8 @@ const SignUp = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth)
+    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
 
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -42,6 +44,10 @@ const SignUp = () => {
         createUserWithEmailAndPassword(email, password);
     }
 
+    const handleGoogleSignIn = () =>{
+        signInWithGoogle();
+    }
+
     return (
         <div className='form-container'>
             <div>
@@ -65,6 +71,7 @@ const SignUp = () => {
                 <p>
                     Already Have an account? <Link className='form-link' to="/login">Login</Link>
                 </p>
+                <button onClick={handleGoogleSignIn} className='google-login'><FcGoogle />&nbsp; Continue with Google</button>
             </div>
         </div>
     );

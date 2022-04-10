@@ -51,3 +51,16 @@
     color: #FF9900;
     text-decoration: none;
 }
+
+.google-login{
+    width: 415px;
+    height: 55px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-bottom: 10px;
+}
