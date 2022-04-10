@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
@@ -11,7 +10,7 @@ const SignUp = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth)
 
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -25,7 +24,7 @@ const SignUp = () => {
         setConfirmPassword(event.target.value);
     }
 
-    if(user){
+    if (user) {
         navigate('/shop');
     }
 
@@ -35,12 +34,12 @@ const SignUp = () => {
             setError('Your two passwords did not match');
             return;
         }
-        if(password.length < 6){
-            setError('Password must be 6 character or longer');
+        if (password.length < 6) {
+            setError('Password must be 6 characters or longer');
             return;
         }
-        createUserWithEmailAndPassword(email, password);
 
+        createUserWithEmailAndPassword(email, password);
     }
 
     return (
@@ -58,13 +57,13 @@ const SignUp = () => {
                     </div>
                     <div className="input-group">
                         <label htmlFor="confirm-password">Confirm Password</label>
-                        <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="" required />
+                        <input onBlur={handleConfirmPasswordBlur} type="password" name="confirm-password" id="" />
                     </div>
-                    <p style={{ color: 'red' }}>{error?.message}</p>
-                    <input className='form-submit' type="submit" value="Sign Up" />
+                    <p style={{ color: 'red' }}>{error}</p>
+                    <input className='form-submit' type="submit" value="Sign Up" required />
                 </form>
                 <p>
-                    Already have an account? <Link className='form-link' to="/login">Login</Link>
+                    Already Have an account? <Link className='form-link' to="/login">Login</Link>
                 </p>
             </div>
         </div>
